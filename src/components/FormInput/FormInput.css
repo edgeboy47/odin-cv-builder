@@ -1,0 +1,16 @@
+/* INPUTS */
+
+.input {
+  display: flex;
+  flex-direction: column;
+}
+
+input{
+  width: 40ch;
+  padding: 0.5rem 1rem;
+  font-family: inherit;
+  outline: none;
+  border: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  border-radius: 4px;
+}
