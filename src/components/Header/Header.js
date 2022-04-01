@@ -4,7 +4,7 @@ import './Header.css';
 class Header extends Component {
   render() {
     return (
-      <header>Header</header>
+      <header>CV Builder</header>
     )
   }
 }
