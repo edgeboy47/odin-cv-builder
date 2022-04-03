@@ -1,8 +1,10 @@
 main {
   display: flex;
+  gap: 4rem;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  margin: 4rem 0;
   
 }
 
@@ -11,7 +13,7 @@ main {
   background: #eee;
   width: 100%;
   max-width: 1000px;
-  height: 800px;
+  min-height: 800px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.2);
   border-radius: 0 8px 8px 8px;
   position: relative;
@@ -22,7 +24,7 @@ main {
   gap: 1rem;
   position: absolute;
   top: calc((2rem + 25px) * -1); /* 2rem = top + bottom padding, 25px = height of content inside tab */
-  left: 0
+  left: 0;
 }
 
 .tab {
@@ -42,7 +44,6 @@ main {
 }
 
 button {
-  /* margin-top: 65rem; */
   background-color: #ddd;
   font-size: 1.25rem;
   font-family: inherit;

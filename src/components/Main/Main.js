@@ -9,7 +9,53 @@ export default class Main extends Component {
     super();
     this.state = {
       activeTab: "Personal",
+      personal: {
+        fName: "",
+        lName: "",
+        email: "",
+        phone: "",
+        street: "",
+        city: "",
+        country: "",
+      },
+      education: [
+        {
+          institution: "",
+          degree: "",
+          from: "",
+          to: "",
+          description: "",
+        }
+      ],
+      experience: [
+        {
+          position: "",
+          location: "",
+          company: "",
+          from: "",
+          to: "",
+          description: "",
+        }
+      ]
+      // TODO: add state for controlled inputs
     };
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(e) {
+    console.log(e.target.value);
+    // TODO onChange event handler for controlled inputs
+    const { name, value } = e.target;
+    
+    if (this.state.activeTab === "Personal") {
+      console.log(this.state.personal)
+      this.setState((state, props) => ({
+        personal: {
+          ...state.personal,
+          [name]: value
+        }
+      }))
+     }
   }
 
   render() {
@@ -17,7 +63,7 @@ export default class Main extends Component {
 
     switch (this.state.activeTab) {
       case "Personal":
-        activeTab = <PersonalTab />;
+        activeTab = <PersonalTab personalState={this.state.personal} onChange={this.handleInputChange}/>;
         break;
 
       case "Education":
@@ -62,7 +108,6 @@ export default class Main extends Component {
               Experience
             </div>
           </div>
-          {/* <PersonalTab /> */}
           {activeTab}
         </div>
         <button>Generate Preview</button>
