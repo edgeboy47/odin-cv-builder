@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { v4 as uuidv4 } from 'uuid';
 import "./Main.css";
 import PersonalTab from "../PersonalTab/PersonalTab";
 import EducationTab from "../EducationTab/EducationTab";
@@ -20,54 +21,107 @@ export default class Main extends Component {
       },
       education: [
         {
+          id: uuidv4(),
           institution: "",
           degree: "",
           from: "",
           to: "",
           description: "",
-        }
+        },
       ],
       experience: [
         {
+          id: uuidv4(),
           position: "",
           location: "",
           company: "",
           from: "",
           to: "",
           description: "",
-        }
-      ]
-      // TODO: add state for controlled inputs
+        },
+      ],
     };
-    this.handleInputChange = this.handleInputChange.bind(this);
+
+    this.handlePersonalInputChange = this.handlePersonalInputChange.bind(this);
+
+    this.handleExperienceInputChange =
+      this.handleExperienceInputChange.bind(this);
+    
+    this.handleEducationInputChange =
+      this.handleEducationInputChange.bind(this);
+    
+    this.addEducation = this.addEducation.bind(this);
+    this.deleteEducation = this.deleteEducation.bind(this);
+    this.addExperience = this.addExperience.bind(this);
+    this.deleteExperience = this.deleteExperience.bind(this);
   }
 
-  handleInputChange(e) {
-    console.log(e.target.value);
-    // TODO onChange event handler for controlled inputs
+  handlePersonalInputChange(e) {
     const { name, value } = e.target;
-    
-    if (this.state.activeTab === "Personal") {
-      console.log(this.state.personal)
-      this.setState((state, props) => ({
-        personal: {
-          ...state.personal,
-          [name]: value
-        }
-      }))
-     }
+
+    this.setState((state, props) => ({
+      personal: {
+        ...state.personal,
+        [name]: value,
+      },
+    }));
   }
+
+  handleEducationInputChange(e, id) {
+    const { name, value } = e.target;
+    this.setState((state, props) => ({
+      education: state.education.map((education) => {
+        if (education.id === id) 
+          return {
+            ...education,
+            [name]: value,
+          };
+        return education;
+      })
+    }))
+  }
+
+  // TODO: onchange for experience form
+  handleExperienceInputChange(e, id) {}
+
+  addEducation(education) {
+    this.setState((state, props) => ({
+      education: [...state.education, education],
+    }));
+  }
+  
+  deleteEducation(id) {
+    this.setState((state, props) => ({
+      education: state.education.filter((education) => education.id !== id),
+    }));
+  }
+
+  // TODO add and delete for experience form
+  addExperience() {}
+  deleteExperience() {}
 
   render() {
     let activeTab;
 
     switch (this.state.activeTab) {
       case "Personal":
-        activeTab = <PersonalTab personalState={this.state.personal} onChange={this.handleInputChange}/>;
+        activeTab = (
+          <PersonalTab
+            personalState={this.state.personal}
+            onChange={this.handlePersonalInputChange}
+          />
+        );
         break;
 
       case "Education":
-        activeTab = <EducationTab />;
+        activeTab = (
+          <EducationTab
+            educationState={this.state.education}
+            onChange={this.handleEducationInputChange}
+            addEducation={this.addEducation}
+            deleteEducation={this.deleteEducation}
+          />
+        );
         break;
 
       case "Experience":
@@ -75,10 +129,15 @@ export default class Main extends Component {
         break;
 
       default:
-        activeTab = <PersonalTab />;
+        activeTab = (
+          <PersonalTab
+            personalState={this.state.personal}
+            onChange={this.handlePersonalInputChange}
+          />
+        );
         break;
     }
-    
+
     return (
       <main>
         <div className="form">
@@ -86,7 +145,7 @@ export default class Main extends Component {
             <div
               className={`tab ${
                 this.state.activeTab === "Personal" ? "active" : ""
-                }`}
+              }`}
               onClick={() => this.setState({ activeTab: "Personal" })}
             >
               Personal
@@ -94,7 +153,7 @@ export default class Main extends Component {
             <div
               className={`tab ${
                 this.state.activeTab === "Education" ? "active" : ""
-                }`}
+              }`}
               onClick={() => this.setState({ activeTab: "Education" })}
             >
               Education
@@ -102,7 +161,7 @@ export default class Main extends Component {
             <div
               className={`tab ${
                 this.state.activeTab === "Experience" ? "active" : ""
-                }`}
+              }`}
               onClick={() => this.setState({ activeTab: "Experience" })}
             >
               Experience
