@@ -1,22 +1,30 @@
 import React, { Component } from "react";
+import { v4 as uuidv4 } from "uuid";
 import FormInput from "../FormInput/FormInput";
 export default class ExperienceTab extends Component {
-  constructor() {
-    super();
-    this.state = {
-      experience: [<ExperienceForm />],
-    };
-  }
   render() {
     return (
       <div>
-        {this.state.experience}
+        {this.props.experienceState.map((experience) => (
+          <ExperienceForm
+            key={experience.id}
+            experience={experience}
+            onChange={this.props.onChange}
+            deleteExperience={this.props.deleteExperience}
+          />
+        ))}
         <button
-          onClick={() => {
-            this.setState({
-              experience: [...this.state.experience, <ExperienceForm />],
-            });
-          }}
+          onClick={() =>
+            this.props.addExperience({
+              id: uuidv4(),
+              position: "",
+              location: "",
+              company: "",
+              from: "",
+              to: "",
+              description: "",
+            })
+          }
         >
           Add Experience
         </button>
@@ -28,13 +36,48 @@ export default class ExperienceTab extends Component {
 class ExperienceForm extends Component {
   render() {
     return (
-      <div>
-        <FormInput labelFor="position" labelText="Position" />
-        <FormInput labelFor="location" labelText="Location" />
-        <FormInput labelFor="company" labelText="Company" />
-        <FormInput labelFor="from" labelText="From" />
-        <FormInput labelFor="to" labelText="To" />
-        <FormInput labelFor="description" labelText="Description" />
+      <div className="experience-form">
+        <FormInput
+          value={this.props.experience.position}
+          onChange={(e) => this.props.onChange(e, this.props.experience.id)}
+          labelFor="position"
+          labelText="Position"
+        />
+        <FormInput
+          value={this.props.experience.location}
+          onChange={(e) => this.props.onChange(e, this.props.experience.id)}
+          labelFor="location"
+          labelText="Location"
+        />
+        <FormInput
+          value={this.props.experience.company}
+          onChange={(e) => this.props.onChange(e, this.props.experience.id)}
+          labelFor="company"
+          labelText="Company"
+        />
+        <FormInput
+          value={this.props.experience.from}
+          onChange={(e) => this.props.onChange(e, this.props.experience.id)}
+          labelFor="from"
+          labelText="From"
+        />
+        <FormInput
+          value={this.props.experience.to}
+          onChange={(e) => this.props.onChange(e, this.props.experience.id)}
+          labelFor="to"
+          labelText="To"
+        />
+        <FormInput
+          value={this.props.experience.description}
+          onChange={(e) => this.props.onChange(e, this.props.experience.id)}
+          labelFor="description"
+          labelText="Description"
+        />
+        <button
+          onClick={() => this.props.deleteExperience(this.props.experience.id)}
+        >
+          Delete Experience
+        </button>
       </div>
     );
   }

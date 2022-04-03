@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import "./Main.css";
 import PersonalTab from "../PersonalTab/PersonalTab";
 import EducationTab from "../EducationTab/EducationTab";
@@ -46,10 +46,10 @@ export default class Main extends Component {
 
     this.handleExperienceInputChange =
       this.handleExperienceInputChange.bind(this);
-    
+
     this.handleEducationInputChange =
       this.handleEducationInputChange.bind(this);
-    
+
     this.addEducation = this.addEducation.bind(this);
     this.deleteEducation = this.deleteEducation.bind(this);
     this.addExperience = this.addExperience.bind(this);
@@ -71,34 +71,53 @@ export default class Main extends Component {
     const { name, value } = e.target;
     this.setState((state, props) => ({
       education: state.education.map((education) => {
-        if (education.id === id) 
+        if (education.id === id)
           return {
             ...education,
             [name]: value,
           };
         return education;
-      })
-    }))
+      }),
+    }));
   }
 
-  // TODO: onchange for experience form
-  handleExperienceInputChange(e, id) {}
+  handleExperienceInputChange(e, id) {
+    const { name, value } = e.target;
+    this.setState((state, props) => ({
+      experience: state.experience.map((experience) => {
+        if (experience.id === id)
+          return {
+            ...experience,
+            [name]: value,
+          };
+        return experience;
+      }),
+    }));
+  }
 
   addEducation(education) {
     this.setState((state, props) => ({
       education: [...state.education, education],
     }));
   }
-  
+
   deleteEducation(id) {
     this.setState((state, props) => ({
       education: state.education.filter((education) => education.id !== id),
     }));
   }
 
-  // TODO add and delete for experience form
-  addExperience() {}
-  deleteExperience() {}
+  addExperience(experience) {
+    this.setState((state, props) => ({
+      experience: [...state.experience, experience],
+    }));
+  }
+
+  deleteExperience(id) {
+    this.setState((state, props) => ({
+      experience: state.experience.filter((experience) => experience.id !== id),
+    }));
+  }
 
   render() {
     let activeTab;
@@ -125,7 +144,14 @@ export default class Main extends Component {
         break;
 
       case "Experience":
-        activeTab = <ExperienceTab />;
+        activeTab = (
+          <ExperienceTab
+            experienceState={this.state.experience}
+            onChange={this.handleExperienceInputChange}
+            addExperience={this.addExperience}
+            deleteExperience={this.deleteExperience}
+          />
+        );
         break;
 
       default:
