@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.a0b311dd.css",
-    "main.js": "/static/js/main.54d278a9.js",
-    "index.html": "/index.html",
-    "main.a0b311dd.css.map": "/static/css/main.a0b311dd.css.map",
-    "main.54d278a9.js.map": "/static/js/main.54d278a9.js.map"
+    "main.css": "/odin-cv-builder/static/css/main.a0b311dd.css",
+    "main.js": "/odin-cv-builder/static/js/main.54d278a9.js",
+    "index.html": "/odin-cv-builder/index.html",
+    "main.a0b311dd.css.map": "/odin-cv-builder/static/css/main.a0b311dd.css.map",
+    "main.54d278a9.js.map": "/odin-cv-builder/static/js/main.54d278a9.js.map"
   },
   "entrypoints": [
     "static/css/main.a0b311dd.css",
