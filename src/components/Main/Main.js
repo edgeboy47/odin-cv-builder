@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import "./Main.css";
 import PersonalTab from "../PersonalTab/PersonalTab";
@@ -195,7 +196,7 @@ export default class Main extends Component {
           </div>
           {activeTab}
         </div>
-        <button>Generate Preview</button>
+        <Link to="/preview" state={this.state}><button>Generate Preview</button></Link>
       </main>
     );
   }

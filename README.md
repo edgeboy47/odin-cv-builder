@@ -1,7 +1,7 @@
 # CV Builder
 
 CV builder webapp.
-[Live Preview]()
+[Live Preview](https://edgeboy47.github.io/odin-cv-builder/)
 
 ### Skills Used
 - HTML
