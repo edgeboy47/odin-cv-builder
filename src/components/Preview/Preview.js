@@ -53,9 +53,6 @@ export const Preview = () => {
           </div>
         </div>
       </div>
-      <button>
-        Generate PDF
-      </button>
     </div>
   );
 };
@@ -70,6 +67,7 @@ const ExperienceItem = ({ experience }) => {
       <span className={styles.company}>
         {experience.company}, {experience.location}
       </span>
+      <div>{experience.description}</div>
     </div>
   );
 };
@@ -82,6 +80,7 @@ const EducationItem = ({ education }) => {
         <span>{`${education.from} - ${education.to}`}</span>
       </div>
       <span className={styles.company}>{education.institution}</span>
+      <div>{education.description}</div>
     </div>
   );
 };
