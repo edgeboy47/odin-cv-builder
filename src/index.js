@@ -11,11 +11,7 @@ ReactDOM.render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/preview" element={<Preview />} />
-        <Route path="*" element={
-          <div>
-            <h1>404</h1>
-          </div>
-        } />
+        <Route path="*" element={<App />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,
